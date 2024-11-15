@@ -5,26 +5,21 @@
 #
 ########################################################################
 # Author  :   xuechengyun
-# E-mail  :   xuechengyun@gmail.com
-# Date    :   2024/11/15 15:45:57
-# Desc    :
+# E-mail  :   xuechengyunxue@gmail.com
+# Date    :   24/11/14 16:56:50
+# Desc    :   编译所有目标文件
 ########################################################################
 
 # set -x
 CUR_DIR=$(cd `dirname $0`; pwd)
 cd ${CUR_DIR}
 
-g++ main.cc game_player.cpp -std=c++23
+source env_variable.sh
 
-
-
-
-
-
-
-
+mkdir -p $build_dir
+cd $build_dir
+cmake ..
+make
 
 cd -
-
-
 
