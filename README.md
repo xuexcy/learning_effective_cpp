@@ -4,6 +4,7 @@
     - Object-Oriented C++
     - Template C++
     - STL
+
 2. 尽量以 const, enum, inline 替换 #define(Prefer consts, enums, and inlines to #defines)
     - 宏在预处理阶段，如果在编译时出错，报错信息可能根本看不懂。你看到的报错信息是宏预处理后展开的代码的报错信息，假设这个宏不是你定义的，可能会一脸懵
     - 宏展开后的行为可能不符合预期
@@ -17,3 +18,7 @@
     - 类成员的初始化顺序和声明顺序一致
     - 使用 local static 来解决 non-local static 初始化顺序不确定的问题
     - 多线程下使用 non-const static， 在程序启动时手动初始化(call reference-returning 函数)，避免 race condition
+5. 了解 C++ 默默编写并调用了哪些函数(Know what functions C++ silently writes and calls)
+    - 编译器会创建默认构造函数(default constructor)、拷贝构造函数(copy constructor)、移动构造函数(move constructor)、拷贝赋值操作符(copy assignment operator，即 `operator=`)、移动赋值操作符(move assignment operator)、析构函数(destructor)。当然，前提是这些函数被调用，可以从 clang++ 为 src/05/main.cc 生成 ast(Abstract Syntax Trees) 看出这一点(执行 `cd src/05 && sh gen_main_ast.sh`)
+    - 编译器生成的 copy constructor，对自定义类型使用类型自带的 copy constructor，对内置类型直接按 bits 拷贝
+    - 编译器生成的 copy assignment operator 与上述的 copy constructor 差不多，不过编译器在某些情况下会拒绝生成 copy assignment operator，比如类成员含有 reference、const 或者基类的 copy assignment operator 为 private

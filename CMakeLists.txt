@@ -35,3 +35,6 @@ add_library(directory src/04/directory.cpp)
 add_library(file_system src/04/file_system.cpp)
 target_link_libraries(directory file_system)
 target_link_libraries(04 directory cpp_utils)
+
+add_executable(05 src/05/main.cc)
+add_executable(05_2 src/05/main2.cc)
