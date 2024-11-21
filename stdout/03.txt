@@ -1,0 +1,3 @@
+a * b == c: true
+a * b == c: true
+a * b == c: [a = 7]

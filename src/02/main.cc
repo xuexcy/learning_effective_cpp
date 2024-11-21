@@ -7,7 +7,7 @@
 # Author  :   xuechengyun
 # E-mail  :   xuechengyun@gmail.com
 # Date    :   2024/11/15 15:08:23
-# Desc    :
+# Desc    :   条款 02: 尽量以 const, enum, inline 替换 #define(Prefer consts, enums, and inlines to #defines)
 ########################################################################
 */
 

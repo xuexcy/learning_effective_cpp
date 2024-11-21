@@ -7,7 +7,7 @@
 # Author  :   xuechengyun
 # E-mail  :   xuechengyun@gmail.com
 # Date    :   2024/11/15 16:00:30
-# Desc    :
+# Desc    :   条款 03: 尽可能使用 const(Use const whenever possible)
 ########################################################################
 */
 
