@@ -1,0 +1,9 @@
+user forget close connection
+user close and ignore exception
+user no need to close connection, DBConn close connection when call destructor and process the exception
+LOG[error]: db connection closed error, msg: close DBConnection error
+user close connection and process exception
+I am a DBConnection user, I get a exception, go ahead
+LOG[error]: db connection closed error, msg: close DBConnection error
+user forget close connection and DBConnV2 does it and process exception for user
+LOG[error]: db connection closed error, msg: close DBConnection error

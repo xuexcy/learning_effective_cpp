@@ -17,11 +17,6 @@
 #include "cpp_utils/util.h"
 
 
-std::random_device rd;
-std::mt19937 gen(rd());
-const int MAX_N{3};
-std::uniform_int_distribution<> dis(0, MAX_N - 1);
-
 // part-1
 // class 含有 non-virtual destructor, 当被继承后再通过基类指针调用析构函数，存在“局部销毁”的问题。
 // 通常 derived 类的成员变量可能没有被销毁，derived 类的析构函数也不会被执行
@@ -49,10 +44,12 @@ public:
 };  // class WristClock
 
 TimeKeeper* get_time_keeper() {
-    auto rand_n = dis(gen);
-    if (rand_n == 0) {
+    static int n{0};
+    ++n;
+    n %= 3;
+    if (0 == n) {
         return new AtomicClock();
-    } else if (1 == rand_n) {
+    } else if (1 == n) {
         return new WaterClock();
     } else {
         return new WristClock();

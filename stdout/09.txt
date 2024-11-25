@@ -1,0 +1,10 @@
+virtual void bad_case::Transaction::logTransaction() const
+construct base class Transaction finished
+virtual bad_case::Transaction::~Transaction()
+virtual void bad_case::Transaction::logTransaction() const
+destruct base class Transaction finished
+void solution::Transaction::logTransaction(const std::string &) const
+transaction log info: price: 1.8
+construct base class Transaction finished
+virtual solution::Transaction::~Transaction()
+destruct base class Transaction finished

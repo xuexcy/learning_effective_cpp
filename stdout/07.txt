@@ -5,7 +5,7 @@ bad_case::AtomicClock::~AtomicClock()
 bad_case::TimeKeeper::~TimeKeeper()
 
 bad_case::TimeKeeper::TimeKeeper()
-bad_case::AtomicClock::AtomicClock()
+bad_case::WaterClock::WaterClock()
 I get a TimeKeeper and then I will delete it
 bad_case::TimeKeeper::~TimeKeeper()
 
@@ -15,11 +15,6 @@ I get a TimeKeeper and then I will delete it
 bad_case::TimeKeeper::~TimeKeeper()
 
 bad_case::TimeKeeper::TimeKeeper()
-bad_case::WaterClock::WaterClock()
-I get a TimeKeeper and then I will delete it
-bad_case::TimeKeeper::~TimeKeeper()
-
-bad_case::TimeKeeper::TimeKeeper()
 bad_case::AtomicClock::AtomicClock()
 I get a TimeKeeper and then I will delete it
 bad_case::TimeKeeper::~TimeKeeper()
@@ -30,7 +25,12 @@ I get a TimeKeeper and then I will delete it
 bad_case::TimeKeeper::~TimeKeeper()
 
 bad_case::TimeKeeper::TimeKeeper()
-bad_case::WaterClock::WaterClock()
+bad_case::WristClock::WristClock()
+I get a TimeKeeper and then I will delete it
+bad_case::TimeKeeper::~TimeKeeper()
+
+bad_case::TimeKeeper::TimeKeeper()
+bad_case::AtomicClock::AtomicClock()
 I get a TimeKeeper and then I will delete it
 bad_case::TimeKeeper::~TimeKeeper()
 
