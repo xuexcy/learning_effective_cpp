@@ -8,7 +8,7 @@
 
 2. 尽量以 const, enum, inline 替换 #define(Prefer consts, enums, and inlines to #defines)
     > 对于单纯常量，最好 const 对象或 enums 替换 #defines
-
+    >
     > 对于形似函数的宏(macros)，最好改用 inline 函数替换 #defines
     - 宏在预处理阶段，如果在编译时出错，报错信息可能根本看不懂。你看到的报错信息是宏预处理后展开的代码的报错信息，假设这个宏不是你定义的，可能会一脸懵
     - 宏展开后的行为可能不符合预期
