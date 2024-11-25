@@ -7,7 +7,7 @@
 # Author  :   xuechengyun
 # E-mail  :   xuechengyun@gmail.com
 # Date    :   2024/11/24 21:37:12
-# Desc    :
+# Desc    :   条款 07: 为多态基类声明 virtual 析构函数(Declare destructor virtual in polymorphic base classes)
 ########################################################################
 */
 
