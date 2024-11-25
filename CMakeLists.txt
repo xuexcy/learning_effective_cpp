@@ -28,6 +28,7 @@ set(EXTRA_LIBS ${EXTRA_LIBS} cpp_utils)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/output/bin)
 
 add_executable(02 src/02/main.cc src/02/game_player.cpp)
+
 add_executable(03 src/03/main.cc)
 
 add_executable(04 src/04/main.cc)
@@ -38,3 +39,7 @@ target_link_libraries(04 directory cpp_utils)
 
 add_executable(05 src/05/main.cc)
 add_executable(05_2 src/05/main2.cc)
+
+add_executable(06 src/06/main.cc)
+
+add_executable(07 src/07/main.cc)

@@ -1,0 +1,41 @@
+bad_case::TimeKeeper::TimeKeeper()
+bad_case::AtomicClock::AtomicClock()
+bad_case::AtomicClock::~AtomicClock()
+
+bad_case::TimeKeeper::~TimeKeeper()
+
+bad_case::TimeKeeper::TimeKeeper()
+bad_case::AtomicClock::AtomicClock()
+I get a TimeKeeper and then I will delete it
+bad_case::TimeKeeper::~TimeKeeper()
+
+bad_case::TimeKeeper::TimeKeeper()
+bad_case::WristClock::WristClock()
+I get a TimeKeeper and then I will delete it
+bad_case::TimeKeeper::~TimeKeeper()
+
+bad_case::TimeKeeper::TimeKeeper()
+bad_case::WaterClock::WaterClock()
+I get a TimeKeeper and then I will delete it
+bad_case::TimeKeeper::~TimeKeeper()
+
+bad_case::TimeKeeper::TimeKeeper()
+bad_case::AtomicClock::AtomicClock()
+I get a TimeKeeper and then I will delete it
+bad_case::TimeKeeper::~TimeKeeper()
+
+bad_case::TimeKeeper::TimeKeeper()
+bad_case::WaterClock::WaterClock()
+I get a TimeKeeper and then I will delete it
+bad_case::TimeKeeper::~TimeKeeper()
+
+bad_case::TimeKeeper::TimeKeeper()
+bad_case::WaterClock::WaterClock()
+I get a TimeKeeper and then I will delete it
+bad_case::TimeKeeper::~TimeKeeper()
+
+sizeof(Point): 8
+sizeof(PointV2) with virtual table pointer: 16
+virtual void class_with_pure_virtual::Derive::print()
+virtual class_with_pure_virtual::Derive::~Derive()
+virtual class_with_pure_virtual::Base::~Base()

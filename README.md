@@ -25,3 +25,8 @@
 6. 若不想使用编译器自动生成的函数，就该明确拒绝(Explicitly disallow the use of compiler-generated functions you do not want)
     - 将不想要编译器自动生成的函数声明为 private 来阻止编译器生成(编译器生成的是 public)
     - 对于 friend 或类中的其他函数，依然可以使用这些 private 函数，只声明并使用的话，错误会发生在链接时；将这些 private 函数放到一个 class base 中并继承，这样 friend 和类中的其他函数在使用时，也会发生编译错误，而不是让错误延后到链接时发生
+7. 为多态基类声明 virtual 析构函数(Declare destructor virtual in polymorphic base classes)
+    - 任何 class 只要带有 virtual 函数都应该有一个 virtual 析构函数，否则可能会出现“局部销毁”(delete 基类指针时只调用了基类的析构函数、销毁基类的成员变量)
+    - 如果 class 不含 virtual 函数，通常表示它可能不想被当成 base class，此时令其析构函数为 virtual 是个馊主意(也就是 virtual destructor 需要和其他 virtual 函数一起配合使用)，至少这会使 class 实例大小增加一个 vptr 大小。也就是说如果要使用多态时，不要继承一个不带 virtual 析构函数的类
+    - 析构函数必须有定义(即使是纯虚函数)，因为 derived class 的析构函数会调用 base class 的析构函数
+    - 并不是所有 base classes 的设计目的都是为了多态

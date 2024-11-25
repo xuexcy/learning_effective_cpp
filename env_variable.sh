@@ -9,7 +9,7 @@ export build_output_bin_dir=$build_output_dir/bin
 
 export stdout_dir=${CUR_DIR}/stdout
 
-# export default_execute_file=thread_safe_copy_on_write
+export default_execute_file=07
 
 # 特殊目录
 ## parameterized_base 在 rust 语言上的一些实现
