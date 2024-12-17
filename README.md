@@ -59,3 +59,10 @@
     - 在 base class 的构造和析构函数中，实例的类型都是 base class，调用的虚函数也是 base class 中的虚函数，如果函数是纯虚函数且未定义，会导致程序在执行时找不到函数定义而异常退出
     - 对于需要在 base class 的构造函数中使用一些 derived class 中的数据/信息时，可以通过使用 base class 的构造函数参数来传递信息
 10. 令 operator== 返回一个 reference to *this(Have assignment operators return a reference to *this)
+    > 令赋值（assignment）操作符返回一个 reference to *this
+    - 方便连锁赋值，像 `int x, y, z; x = y = z = 10` 一样
+11. 在 operator== 中处理“自我赋值”(Handle assignment to self in operator==)
+    > 确保当对象自我复制时 operator= 有良好行为。器中技术包括比较“来源对象”和“目标对象”的地址、精心周到的语句顺序、以及 copy-and-swap。
+    > 确定任何函数如果操作一个以上的对象，而其中多个对象时同一个对象时，其行为仍然正确
+    - `if (this == &rhs) return;`
+    - copy-and-swap: `ClassName temp(rhs); swap(this, &rhs);`

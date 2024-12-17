@@ -49,3 +49,5 @@ add_executable(08 src/08/main.cc)
 add_executable(09 src/09/main.cc)
 
 add_executable(10 src/10/main.cc)
+
+add_executable(11 src/10/main.cc)
