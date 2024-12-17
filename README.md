@@ -58,3 +58,4 @@
     > 在构造和析构期间不要调用 virtual 函数，因为这类调用从不下降至 derived class（比起当前执行构造函数和析构函数的那层）。
     - 在 base class 的构造和析构函数中，实例的类型都是 base class，调用的虚函数也是 base class 中的虚函数，如果函数是纯虚函数且未定义，会导致程序在执行时找不到函数定义而异常退出
     - 对于需要在 base class 的构造函数中使用一些 derived class 中的数据/信息时，可以通过使用 base class 的构造函数参数来传递信息
+10. 令 operator== 返回一个 reference to *this(Have assignment operators return a reference to *this)

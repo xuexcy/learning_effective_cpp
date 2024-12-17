@@ -19,7 +19,7 @@ source env_variable.sh
 mkdir -p $build_dir
 cd $build_dir
 cmake ..
-make
+make -j$(getconf _NPROCESSORS_ONLN)
 
 cd -
 
