@@ -50,4 +50,6 @@ add_executable(09 src/09/main.cc)
 
 add_executable(10 src/10/main.cc)
 
-add_executable(11 src/10/main.cc)
+add_executable(11 src/11/main.cc)
+
+add_executable(12 src/12/main.cc)

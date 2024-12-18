@@ -58,11 +58,27 @@
     > 在构造和析构期间不要调用 virtual 函数，因为这类调用从不下降至 derived class（比起当前执行构造函数和析构函数的那层）。
     - 在 base class 的构造和析构函数中，实例的类型都是 base class，调用的虚函数也是 base class 中的虚函数，如果函数是纯虚函数且未定义，会导致程序在执行时找不到函数定义而异常退出
     - 对于需要在 base class 的构造函数中使用一些 derived class 中的数据/信息时，可以通过使用 base class 的构造函数参数来传递信息
-10. 令 operator== 返回一个 reference to *this(Have assignment operators return a reference to *this)
+10. 令 operator= 返回一个 reference to *this(Have assignment operators return a reference to *this)
     > 令赋值（assignment）操作符返回一个 reference to *this
     - 方便连锁赋值，像 `int x, y, z; x = y = z = 10` 一样
-11. 在 operator== 中处理“自我赋值”(Handle assignment to self in operator==)
+11. 在 operator= 中处理“自我赋值”(Handle assignment to self in operator=)
     > 确保当对象自我复制时 operator= 有良好行为。器中技术包括比较“来源对象”和“目标对象”的地址、精心周到的语句顺序、以及 copy-and-swap。
     > 确定任何函数如果操作一个以上的对象，而其中多个对象时同一个对象时，其行为仍然正确
-    - `if (this == &rhs) return;`
-    - copy-and-swap: `ClassName temp(rhs); swap(this, &rhs);`
+    - `if (this == &rhs) return *this;`
+    - copy-and-swap: `ClassName temp(rhs); swap(this, &rhs); return *this;`
+12. 复制对象时勿忘其每一个成分(Copy all parts of object)
+    > Copying 函数应该确保赋值“对象内的所有成员变量”及“所有 base class 成分”
+    > 不要尝试一某个 copying 函数实现另一个 copying 函数。应该将共同技能放进第三个函数中，并有两个 copying 函数共同调用。
+    - class 新添成员变量时，必须同时修改 copy 函数
+    - 在继承的 copy 函数中调用基类的 copy 函数
+    ```cpp
+    // copy constructor
+    Derived(const Derived& rhs): Base(rhs), a_(rhs.a_), b_(rhs.b_) {}
+    // copy assignment operator
+    Derived& (const Derived& rhs) {
+        Base::operator=(rhs);
+        a_ = rhs.a_;
+        b_ = rhs.b_;
+    }
+    ```
+    - 不要在 copy assignment operator 中调用 copy constructor，反之也是如此，如果有很多相同的代码，可以提取一个 private void init() 函数出来

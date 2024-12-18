@@ -7,7 +7,7 @@
 # Author  :   xuechengyun
 # E-mail  :   xuechengyun@gmail.com
 # Date    :   2024/12/17 21:34:17
-# Desc    :   条款 11： 在 operator== 中处理“自我赋值”(Handle assignment to self in operator==)
+# Desc    :   条款 11： 在 operator= 中处理“自我赋值”(Handle assignment to self in operator=)
 ########################################################################
 */
 

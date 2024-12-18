@@ -7,7 +7,7 @@
 # Author  :   xuechengyun
 # E-mail  :   xuechengyun@gmail.com
 # Date    :   2024/12/17 21:20:08
-# Desc    :   条款 10： 令 operator== 返回一个 reference to *this(Have assignment operators return a reference to *this)
+# Desc    :   条款 10： 令 operator= 返回一个 reference to *this(Have assignment operators return a reference to *this)
 ########################################################################
 */
 void run_int_assignment() {
