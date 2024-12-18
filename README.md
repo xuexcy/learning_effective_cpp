@@ -82,3 +82,6 @@
     }
     ```
     - 不要在 copy assignment operator 中调用 copy constructor，反之也是如此，如果有很多相同的代码，可以提取一个 private void init() 函数出来
+13. 以对象管理资源(Use objects to manage resources)
+    > 为防止资源泄露，请使用 RAII 对象，他们在构造函数中获得资源并在析构函数中释放资源
+    - 使用智能指针来管理和释放资源
