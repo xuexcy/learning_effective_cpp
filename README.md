@@ -85,3 +85,9 @@
 13. 以对象管理资源(Use objects to manage resources)
     > 为防止资源泄露，请使用 RAII 对象，他们在构造函数中获得资源并在析构函数中释放资源
     - 使用智能指针来管理和释放资源
+14. 在资源管理类中小心 copying 行为(Think carefully about copying behavior in resource-managing classes)
+    > 复制 RAII 对象必须一并复制它所管理的资源，所以资源的 copying 行为决定 RAII 对象的 copying 行为
+    > 普遍而常见的 RAII class copying 行为是：抑制 copying、施行引用技术法（reference counting）。不过其他行为也都可能被实现。
+    - 可以实现 RAII likely 封装以管理资源
+    - 可以抑制 RAII 的 copying 行为（Uncopyable）或者使用引用计数（可以指定在计数归 0 时的 deleter 行为 ）
+    - 可以使用 [function poisoning](https://github.com/xuexcy/learning_more_cpp_idioms/blob/main/src/function_poisoning.cc) 来禁用一些不合适的接口
