@@ -97,3 +97,12 @@
     - 对自行封装的 RAII 类，提供一个接口让用户获取原始资源，比如智能指针的 `T* get();`
     - 显示转换：`Data get() const { return d_; }`
     - 隐式转换：`operator Data() const { return d_; }`
+16. 成对使用 new 和 delete 时要采取相同形式(Use the same form in corresponding uses of new and delete)
+    > 如果你在 new 表达式中使用 []，必须在相应的 delete 表达式中也使用 []。如果你在 new 表达式中不使用 []，一定不要在相应的 delete 表达式中使用 []。
+    - new 和 delete 中的 [] 都要配对使用
+    ```cpp
+    int* a = new int(1);
+    delete a;
+    int* b = new int[8];
+    delete [] b;
+    ```
