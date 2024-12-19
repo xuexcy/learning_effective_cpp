@@ -1,11 +1,11 @@
 # [Effective C++](https://github.com/xuexcy/public_attachments/blob/main/books/Effective%20C%2B%2B%E4%B8%AD%E6%96%87%E7%89%88%EF%BC%88%E7%AC%AC%E4%B8%89%E7%89%88%EF%BC%89.pdf)
+# 1. 让自己习惯 C++(Accustoming Yourself to C++)
 1. 视 C++ 为一个语言联邦(View C++ as a federation of languages)
     > C++ 高效变成守则视情况而变化，取决于你使用 C++ 的哪一部分
     - C
     - Object-Oriented C++
     - Template C++
     - STL
-
 2. 尽量以 const, enum, inline 替换 #define(Prefer consts, enums, and inlines to #defines)
     > 对于单纯常量，最好 const 对象或 enums 替换 #defines
     >
@@ -32,6 +32,7 @@
     - 类成员的初始化顺序和声明顺序一致
     - 使用 local static 来解决 non-local static 初始化顺序不确定的问题
     - 多线程下使用 non-const static， 在程序启动时手动初始化(call reference-returning 函数)，避免 race condition
+# 2. 构造/析构/赋值运算(Constructors, Destructors, and Assignment Operators)
 5. 了解 C++ 默默编写并调用了哪些函数(Know what functions C++ silently writes and calls)
     > 编译器可以暗自为 class 创建 _default_ 构造函数、_copy_ 函数、_copy assignment_ 操作符，以及析构函数
     - 编译器会创建默认构造函数(default constructor)、拷贝构造函数(copy constructor)、移动构造函数(move constructor)、拷贝赋值操作符(copy assignment operator，即 `operator=`)、移动赋值操作符(move assignment operator)、析构函数(destructor)。当然，前提是这些函数被调用，可以从 clang++ 为 src/05/main.cc 生成 ast(Abstract Syntax Trees) 看出这一点(执行 `cd src/05 && sh gen_main_ast.sh`)
@@ -82,6 +83,7 @@
     }
     ```
     - 不要在 copy assignment operator 中调用 copy constructor，反之也是如此，如果有很多相同的代码，可以提取一个 private void init() 函数出来
+# 3. 资源管理(Resource Management)
 13. 以对象管理资源(Use objects to manage resources)
     > 为防止资源泄露，请使用 RAII 对象，他们在构造函数中获得资源并在析构函数中释放资源
     - 使用智能指针来管理和释放资源
@@ -114,4 +116,5 @@
     // 导致抛出异常后无法通过 std::shared_ptr 回收 new Widget 申请的资源
     process_widget(std::shared_ptr<Widget>(new Widget), function_throw_exception());
     ```
+# 4. 设计与声明(Designs and Declarations)
 
