@@ -1,4 +1,4 @@
-6166835416
+6128660696
 void B3::bad_case::B::print()
 vec_ size: 10
 vec_: [2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
@@ -15,9 +15,9 @@ void solution::Directory::print_disk_serial_num()
 [0, 1]
 void solution::Directory::print_disk_serial_num()
 void solution_2::Directory::print_disk_serial_num()
+void solution_2::Directory::print_disk_serial_num()
+[0, 1]
 [0, 1]
 [0, 1]
 void solution_2::Directory::print_disk_serial_num()
-void solution_2::Directory::print_disk_serial_num()
-[0, 1]
 [0, 1]

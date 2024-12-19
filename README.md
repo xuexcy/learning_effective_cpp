@@ -15,7 +15,7 @@
 3. 尽可能使用 const(Use const whenever possible)
     > 将某些东西声明为 const 可帮助编译器侦测出错误用户。const 可被施加于任何作用域内的对象、函数参数、函数返回类型、成员函数本体
     >
-    > 编译器强制实施 bitwise constness，但你编写程序时应该使用“概念上的常量性”（conceptual constness）
+    > 编译器强制实施 bitwise constness，但你编写程序时应该使用“概念上的常量性”(conceptual constness)
     >
     > 当 const 和 non-const 成员函数有着实质等价的实现时，令 non-const 版本调用 const 版本可避免代码重复
     - 尽量加上 const，让编译器进行一些辅助检查
@@ -25,7 +25,7 @@
 4. 确定对象被使用前已经被初始化(Make sure that objects are initialized before they're used)
     > 为内置型对象进行手工初始化，因为 C++不保证初始化它们
     >
-    > 构造函数最好使用成员初始列（member initialization list），而不要在构造函数本体内使用赋值操作（assignment）。初始列列出的成员变量，其排列次序应该和他们在 class 中的声明次序相同
+    > 构造函数最好使用成员初始列(member initialization list)，而不要在构造函数本体内使用赋值操作(assignment)。初始列列出的成员变量，其排列次序应该和他们在 class 中的声明次序相同
     >
     > 为免除“跨编译单元之初始化次序”问题，请以 local static 对象替换 non-local static 对象
     - 确保内置类型初始化，使用初值列初始化而不是构造函数内
@@ -38,28 +38,28 @@
     - 编译器生成的 copy constructor，对自定义类型使用类型自带的 copy constructor，对内置类型直接按 bits 拷贝
     - 编译器生成的 copy assignment operator 与上述的 copy constructor 差不多，不过编译器在某些情况下会拒绝生成 copy assignment operator，比如类成员含有 reference、const 或者基类的 copy assignment operator 为 private
 6. 若不想使用编译器自动生成的函数，就该明确拒绝(Explicitly disallow the use of compiler-generated functions you do not want)
-    > 为驳回编译器自动（暗自）提供的机能，可将相应的成员函数声明为 private 并且不予实现。使用像 Uncopyable 这样的 base class 也是一种做法
+    > 为驳回编译器自动(暗自)提供的机能，可将相应的成员函数声明为 private 并且不予实现。使用像 Uncopyable 这样的 base class 也是一种做法
     - 将不想要编译器自动生成的函数声明为 private 来阻止编译器生成(编译器生成的是 public)
     - 对于 friend 或类中的其他函数，依然可以使用这些 private 函数，只声明并使用的话，错误会发生在链接时；将这些 private 函数放到一个 class base 中并继承，这样 friend 和类中的其他函数在使用时，也会发生编译错误，而不是让错误延后到链接时发生
 7. 为多态基类声明 virtual 析构函数(Declare destructor virtual in polymorphic base classes)
-    > polymorphic（带多态性质的）base classes 应该声明一个 virtual 析构函数。如果 class 带有任何 virtual 函数，它就应该拥有一个 virtual 析构函数
+    > polymorphic(带多态性质的)base classes 应该声明一个 virtual 析构函数。如果 class 带有任何 virtual 函数，它就应该拥有一个 virtual 析构函数
     >
-    > Classes 的设计目的如果不是作为 base classes 使用，或不是为了具备多态性（polymorphically），就不应该声明 virtual 析构函数
+    > Classes 的设计目的如果不是作为 base classes 使用，或不是为了具备多态性(polymorphically)，就不应该声明 virtual 析构函数
     - 任何 class 只要带有 virtual 函数都应该有一个 virtual 析构函数，否则可能会出现“局部销毁”(delete 基类指针时只调用了基类的析构函数、销毁基类的成员变量)
     - 如果 class 不含 virtual 函数，通常表示它可能不想被当成 base class，此时令其析构函数为 virtual 是个馊主意(也就是 virtual destructor 需要和其他 virtual 函数一起配合使用)，至少这会使 class 实例大小增加一个 vptr 大小。也就是说如果要使用多态时，不要继承一个不带 virtual 析构函数的类
     - 析构函数必须有定义(即使是纯虚函数)，因为 derived class 的析构函数会调用 base class 的析构函数
     - 并不是所有 base classes 的设计目的都是为了多态
 8. 别让异常逃离析构函数(Prevent exceptions from leaving destructors)
-    > 析构函数绝对不要吐出异常。如果一个被析构函数调用的函数可能抛出异常，析构函数应该捕捉任何异常，然后吞下它们（不传播）或结束程序
-    > 如果客户需要对某个操作函数运行期间抛出的异常做出反应，那么 class 应该提供一个普通函数（而非在析构函数中）执行该操作
+    > 析构函数绝对不要吐出异常。如果一个被析构函数调用的函数可能抛出异常，析构函数应该捕捉任何异常，然后吞下它们(不传播)或结束程序
+    > 如果客户需要对某个操作函数运行期间抛出的异常做出反应，那么 class 应该提供一个普通函数(而非在析构函数中)执行该操作
     - 析构时发生异常可能导致资源泄露，异常 必须来自析构函数之外的其他函数，如果析构函数调用的函数可能发生异常，析构函数必须吞下异常或终止程序
     - 给用户提供处理异常的机会，如果用户忽略它，我们需要替他们处理
 9. 绝不在构造和析构过程中调用 virtual 函数(Never call virtual functions during construction or destruction)
-    > 在构造和析构期间不要调用 virtual 函数，因为这类调用从不下降至 derived class（比起当前执行构造函数和析构函数的那层）。
+    > 在构造和析构期间不要调用 virtual 函数，因为这类调用从不下降至 derived class(比起当前执行构造函数和析构函数的那层)。
     - 在 base class 的构造和析构函数中，实例的类型都是 base class，调用的虚函数也是 base class 中的虚函数，如果函数是纯虚函数且未定义，会导致程序在执行时找不到函数定义而异常退出
     - 对于需要在 base class 的构造函数中使用一些 derived class 中的数据/信息时，可以通过使用 base class 的构造函数参数来传递信息
 10. 令 operator= 返回一个 reference to *this(Have assignment operators return a reference to *this)
-    > 令赋值（assignment）操作符返回一个 reference to *this
+    > 令赋值(assignment)操作符返回一个 reference to *this
     - 方便连锁赋值，像 `int x, y, z; x = y = z = 10` 一样
 11. 在 operator= 中处理“自我赋值”(Handle assignment to self in operator=)
     > 确保当对象自我复制时 operator= 有良好行为。器中技术包括比较“来源对象”和“目标对象”的地址、精心周到的语句顺序、以及 copy-and-swap。
@@ -87,7 +87,13 @@
     - 使用智能指针来管理和释放资源
 14. 在资源管理类中小心 copying 行为(Think carefully about copying behavior in resource-managing classes)
     > 复制 RAII 对象必须一并复制它所管理的资源，所以资源的 copying 行为决定 RAII 对象的 copying 行为
-    > 普遍而常见的 RAII class copying 行为是：抑制 copying、施行引用技术法（reference counting）。不过其他行为也都可能被实现。
+    > 普遍而常见的 RAII class copying 行为是：抑制 copying、施行引用技术法(reference counting)。不过其他行为也都可能被实现。
     - 可以实现 RAII likely 封装以管理资源
-    - 可以抑制 RAII 的 copying 行为（Uncopyable）或者使用引用计数（可以指定在计数归 0 时的 deleter 行为 ）
+    - 可以抑制 RAII 的 copying 行为(Uncopyable)或者使用引用计数(可以指定在计数归 0 时的 deleter 行为 )
     - 可以使用 [function poisoning](https://github.com/xuexcy/learning_more_cpp_idioms/blob/main/src/function_poisoning.cc) 来禁用一些不合适的接口
+15. 在资源管理类中提供对原始资源的访问(Provide access to raw resources in resource-managing classes)
+    > APIs 往往要求访问原始资源（raw resources），所以每一个 RAII class 应该提供一个“取得其所管理之资源”的办法。
+    > 对原始资源的访问可经由显示转换或隐式转换。一般而言显示转换比较安全，但隐式转换对客户比较方便。
+    - 对自行封装的 RAII 类，提供一个接口让用户获取原始资源，比如智能指针的 `T* get();`
+    - 显示转换：`Data get() const { return d_; }`
+    - 隐式转换：`operator Data() const { return d_; }`

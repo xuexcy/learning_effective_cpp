@@ -1,10 +1,33 @@
-2024-12-18 07:40:05.826480 INFO: Customer copy constructor
-2024-12-18 07:40:05.827949 INFO: Customer copy assignment operator
-2024-12-18 07:40:05.827972 INFO: Customer2 copy constructor
-2024-12-18 07:40:05.827990 INFO: Customer2 copy assignment operator
-2024-12-18 07:40:05.828006 INFO: PriorityCustomer copy constructor
-2024-12-18 07:40:05.828023 INFO: PriorityCustomer copy assignment operator
-2024-12-18 07:40:05.828039 INFO: Customer copy constructor
-2024-12-18 07:40:05.828055 INFO: PriorityCustomer copy constructor
-2024-12-18 07:40:05.828070 INFO: PriorityCustomer copy assignment operator
-2024-12-18 07:40:05.828086 INFO: Customer copy assignment operator
+Customer
+a: [name: a]
+b: [name: b]
+LOG_INFO: Customer copy constructor
+c: [name: a]
+LOG_INFO: Customer copy assignment operator
+c: [name: b]
+
+Customer2
+a: [name: a , age: 1]
+b: [name: b , age: 2]
+LOG_INFO: Customer2 copy constructor
+c: [name: a , age: 1]
+LOG_INFO: Customer2 copy assignment operator
+c: [name: b , age: 2]
+
+bad_case::PriorityCustomer
+a: [name: a], [priority: 1]
+b: [name: b], [priority: 2]
+LOG_INFO: bad_case::PriorityCustomer copy constructor
+c: [name: ], [priority: 1]
+LOG_INFO: bad_case::PriorityCustomer copy assignment operator
+c: [name: ], [priority: 2]
+
+solution::PriorityCustomer
+a: [name: a], [priority: 1]
+b: [name: b], [priority: 2]
+LOG_INFO: Customer copy constructor
+LOG_INFO: solution::PriorityCustomer copy constructor
+c: [name: a], [priority: 1]
+LOG_INFO: Customer copy assignment operator
+LOG_INFO: solution::PriorityCustomer copy assignment operator
+c: [name: b], [priority: 2]

@@ -1,0 +1,21 @@
+
+void bad_case::run()
+lock mtx
+unlock
+
+void solution::run()
+lock mtx
+unlock
+
+void bad_case_duplicate_unlock::run()
+lock mtx
+unlock
+unlock
+
+void solution_of_uncopyable::run()
+lock mtx
+unlock
+
+void solution_of_shared::run()
+lock mtx
+unlock
