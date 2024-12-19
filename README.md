@@ -106,3 +106,12 @@
     int* b = new int[8];
     delete [] b;
     ```
+17. 以独立语句将 newed 对象置入智能指针(Store newed objects in smart pointers in standalone statements)
+    > 以独立语句将 newed 对象存储与（置入）智能指针内。如果不这样做，一旦异常被抛出，有可能导致难以察觉的资源泄露。
+    - 使用 `std::make_shared`
+    ```cpp
+    // function_throw_exception 可能发生在 new Widget 和 std::shared_ptr<Widget>(widget_ptr) 之间
+    // 导致抛出异常后无法通过 std::shared_ptr 回收 new Widget 申请的资源
+    process_widget(std::shared_ptr<Widget>(new Widget), function_throw_exception());
+    ```
+
