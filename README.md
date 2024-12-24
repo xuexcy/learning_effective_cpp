@@ -123,3 +123,9 @@
     > “阻止误用”的办法包括简历新类型、限制类型上的操作，束缚对象值，以及消除客户的资源管理责任
     > std::shared_ptr 支持定制型删除器(custom deleter)。这可防范 DLL 问题，可悲用来自动解除互斥锁(mutexes; 见条款 14)等等。
     - `Date (int day, int month, int year);` -> `Date (Day d, Month m, Year y);`
+19. 设计 class 犹如设计 type(Treat class design as type design)
+20. 宁以 pass-by-reference-to-const 替换 pass-by-value(Prefer pass-by-reference-to-const to pass-by-value)
+    > 尽量以 pass-by-reference-to-const 替换 pass-by-value。前者通常比较搞笑，并可避免切割问题(slicing problem)。
+    > 以上规则并不适用于内置类型，以及 STL 的迭代器和函数对象。对他们而言，pass-by-value 往往比较适当。
+    - pass-by-value 往往造成不必要的构造和析构，以及造成切割问题(将继承类中的信息切除)
+

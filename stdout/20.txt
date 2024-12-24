@@ -1,0 +1,14 @@
+Person::Person()
+Student::Student()
+virtual Student::~Student()
+virtual Person::~Person()
+name: window_with_scroll_bars
+virtual void WindowWithScrollBars::display() const
+name: window_with_scroll_bars
+virtual void WindowWithScrollBars::display() const
+name: window_with_scroll_bars
+virtual void Window::display() const
+name: window_with_scroll_bars
+virtual void Window::display() const
+virtual Student::~Student()
+virtual Person::~Person()
