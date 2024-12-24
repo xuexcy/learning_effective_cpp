@@ -130,4 +130,8 @@
     - pass-by-value 往往造成不必要的构造和析构，以及造成切割问题(将继承类中的信息切除)
 21. 必须返回对象时，别妄想返回其 reference(Don't try to return a reference when you must return an object)
     > 绝不要返回 pointer 或 reference 指向一个 local stack 对象，或返回 reference 指向一个 heap-allocated 对象，或返回 pointer 或 reference 指向一个 local static 对象而有可能同时需要多个这样的对象。条款 4 已经为“在单线程环境中合理返回 reference 指向一个 local static 对象”提供了一份设计实例。
+22. 将成员变量声明为 private(Declare data members private)
+    > 切记将成员变量声明为 private。这可赋予客户访问数据的一致性、可细微划分访问控制、允诺约束条件获得保证，并提供 class 作者以充分的实现弹性。
+    > protected 并不比 public 更具封装性
+    - 使用的 public 成员变量，如果类的声明逻辑发生修改，可能导致较大的代码改动。比如从 `class SpeedDataCollection` 中获取速度平均值，如果使用 public 成员变量进行计算，计算方式可能会改变(比如 class 从存储所有平均值改为每次存储时叠加速度和计数)，此时通过 `double average() const;` 获取平均值并不需要修改用户代码
 
