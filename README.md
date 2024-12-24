@@ -128,4 +128,6 @@
     > 尽量以 pass-by-reference-to-const 替换 pass-by-value。前者通常比较搞笑，并可避免切割问题(slicing problem)。
     > 以上规则并不适用于内置类型，以及 STL 的迭代器和函数对象。对他们而言，pass-by-value 往往比较适当。
     - pass-by-value 往往造成不必要的构造和析构，以及造成切割问题(将继承类中的信息切除)
+21. 必须返回对象时，别妄想返回其 reference(Don't try to return a reference when you must return an object)
+    > 绝不要返回 pointer 或 reference 指向一个 local stack 对象，或返回 reference 指向一个 heap-allocated 对象，或返回 pointer 或 reference 指向一个 local static 对象而有可能同时需要多个这样的对象。条款 4 已经为“在单线程环境中合理返回 reference 指向一个 local static 对象”提供了一份设计实例。
 
