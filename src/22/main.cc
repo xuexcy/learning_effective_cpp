@@ -7,7 +7,7 @@
 # Author : xuechengyun
 # E-mail : xuechengyun@gmail.com
 # Date   : 2024/12/24 16:46:12
-# Desc   :
+# Desc   : 条款 22：将成员变量声明为 private(Declare data members private)
 ########################################################################
 */
 
