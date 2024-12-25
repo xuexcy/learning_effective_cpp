@@ -1,0 +1,6 @@
+void run()
+Rational::Rational(int, int)
+Rational::Rational(int, int)
+Rational::Rational(int, int)
+Rational::Rational(int, int)
+Rational::Rational(int, int)

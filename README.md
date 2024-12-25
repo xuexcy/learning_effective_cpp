@@ -135,7 +135,26 @@
     > protected 并不比 public 更具封装性
     - 使用的 public 成员变量，如果类的声明逻辑发生修改，可能导致较大的代码改动。比如从 `class SpeedDataCollection` 中获取速度平均值，如果使用 public 成员变量进行计算，计算方式可能会改变(比如 class 从存储所有平均值改为每次存储时叠加速度和计数)，此时通过 `double average() const;` 获取平均值并不需要修改用户代码
 23. 宁以 non-member、non-friend 替换 member 函数(Prefer non-member non-friend functions to member functions)
-    > 宁可那 non-member non-friend 函数替换 member 函数。这样做可以增加封装性、包裹弹性（packing flexibility）和机能扩充性。
+    > 宁可拿 non-member non-friend 函数替换 member 函数。这样做可以增加封装性、包裹弹性（packing flexibility）和机能扩充性。
     - non-mem non-friend 函数不会访问 class 的私有成员，方便迭代 class
     - 将工具/便利函数放到和 class 相同的 namespace，并分类置于不同的 header.h 中，方便用户使用，亦可减少编译依赖
     - 用户也可以封装自己动工具函数，并放到和 class 相同的 namespace 中以便使用
+24. 若所有参数皆需类型，请为此采用 non-member 函数(Declare non-member functions when type conversion should apply to all parameters)
+    > 如果你需要为某个函数的所有参数（包括被 this 指针所指的那个隐喻参数）进行类型转换，那么这个函数必须是个 non-member。
+    - 对于 binary operator，如果 lhs 和 rhs 都需要隐式转换，那么可以将 operator 声明为 non-member 函数
+    ```cpp
+    class Rational { public: Rational(int n, int d); };
+    Rational a(1, 2);
+    {
+        // class member function
+        const Rational Rational::Rational(const Rational& rhs) const;
+        // no
+        Result res = 2 * a;
+    }
+    {
+        // non-member function
+        const Rational operator*(const Rational& lhs, const Rational& rhs);
+        // yes
+        Result res = 2 * a;
+    }
+    ```
