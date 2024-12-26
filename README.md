@@ -158,3 +158,11 @@
         Result res = 2 * a;
     }
     ```
+25. 考虑写一个不抛异常的 swap 函数(Consider support for a non-throwing swap)
+    > 当 std::swap 对你的类型效率不高时，提供一个 swap 成员函数，并确定这个函数不抛异常。
+    > 如果你提供一个 member swap, 也该提供一个 non-member swap 用来调用前者，对于 classes (而非 templates)，也请特化 std::swap。
+    > 调用 swap 时应针对 std::swap 使用 using 声明式，然后调用 swap 并且不带任何“命名空间资格修饰”
+    > 为“用户定义类型”进行 std templates 全特化时好的，但千万不要尝试在 std 内加入某些对 std 而言全新的东西。
+    - 对于 class：pImpl + member swap + 全特化 std::swap
+    - 对于 class template：pImpl + member swap + non-member swap
+    - 使用 swap 时：`using std::swap; swap(lhs, rhs);`(named-lookup-rules)

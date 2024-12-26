@@ -7,7 +7,7 @@
 # Author : xuechengyun
 # E-mail : xuechengyun@gmail.com
 # Date   : 2024/12/25 18:02:28
-# Desc   :
+# Desc   : 条款 24：若所有参数皆需类型，请为此采用 non-member 函数(Declare non-member functions when type conversion should apply to all parameters)
 ########################################################################
 */
 
