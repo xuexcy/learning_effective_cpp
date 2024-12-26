@@ -168,3 +168,5 @@
     - 使用 swap 时：`using std::swap; swap(lhs, rhs);`(named-lookup-rules)
 # 5. 实现(Implementations)
 26. 尽可能延后变量定义式的出现时间(Postpone variable definitions as long as possible)
+    > 尽可能延后变量定义式的出现。这样做可增加程序的清晰度并改善程序效率
+    - 提前定义的变量如果没有使用，会造成多余的构造与析构
