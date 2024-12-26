@@ -166,3 +166,5 @@
     - 对于 class：pImpl + member swap + 全特化 std::swap
     - 对于 class template：pImpl + member swap + non-member swap
     - 使用 swap 时：`using std::swap; swap(lhs, rhs);`(named-lookup-rules)
+# 5. 实现(Implementations)
+26. 尽可能延后变量定义式的出现时间(Postpone variable definitions as long as possible)
