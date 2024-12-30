@@ -72,16 +72,16 @@
     > 不要尝试一某个 copying 函数实现另一个 copying 函数。应该将共同技能放进第三个函数中，并有两个 copying 函数共同调用。
     - class 新添成员变量时，必须同时修改 copy 函数
     - 在继承的 copy 函数中调用基类的 copy 函数
-    ```cpp
-    // copy constructor
-    Derived(const Derived& rhs): Base(rhs), a_(rhs.a_), b_(rhs.b_) {}
-    // copy assignment operator
-    Derived& (const Derived& rhs) {
-        Base::operator=(rhs);
-        a_ = rhs.a_;
-        b_ = rhs.b_;
-    }
-    ```
+        ```cpp
+        // copy constructor
+        Derived(const Derived& rhs): Base(rhs), a_(rhs.a_), b_(rhs.b_) {}
+        // copy assignment operator
+        Derived& (const Derived& rhs) {
+            Base::operator=(rhs);
+            a_ = rhs.a_;
+            b_ = rhs.b_;
+        }
+        ```
     - 不要在 copy assignment operator 中调用 copy constructor，反之也是如此，如果有很多相同的代码，可以提取一个 private void init() 函数出来
 # 3. 资源管理(Resource Management)
 13. 以对象管理资源(Use objects to manage resources)
@@ -102,20 +102,23 @@
 16. 成对使用 new 和 delete 时要采取相同形式(Use the same form in corresponding uses of new and delete)
     > 如果你在 new 表达式中使用 []，必须在相应的 delete 表达式中也使用 []。如果你在 new 表达式中不使用 []，一定不要在相应的 delete 表达式中使用 []。
     - new 和 delete 中的 [] 都要配对使用
-    ```cpp
-    int* a = new int(1);
-    delete a;
-    int* b = new int[8];
-    delete [] b;
-    ```
+        ```cpp
+        int* a = new int(1);
+        delete a;
+        int* b = new int[8];
+        delete [] b;
+        ```
 17. 以独立语句将 newed 对象置入智能指针(Store newed objects in smart pointers in standalone statements)
     > 以独立语句将 newed 对象存储与（置入）智能指针内。如果不这样做，一旦异常被抛出，有可能导致难以察觉的资源泄露。
     - 使用 `std::make_shared`
-    ```cpp
-    // function_throw_exception 可能发生在 new Widget 和 std::shared_ptr<Widget>(widget_ptr) 之间
-    // 导致抛出异常后无法通过 std::shared_ptr 回收 new Widget 申请的资源
-    process_widget(std::shared_ptr<Widget>(new Widget), function_throw_exception());
-    ```
+        ```cpp
+        // function_throw_exception 可能发生在 new Widget 和 std::shared_ptr<Widget>(widget_ptr) 之间
+        // 导致抛出异常后无法通过 std::shared_ptr 回收 new Widget 申请的资源
+        // no:
+        process_widget(std::shared_ptr<Widget>(new Widget), function_throw_exception());
+        // yes:
+        process_widget(std::make_shared<Widget>(), function_throw_exception());
+        ```
 # 4. 设计与声明(Designs and Declarations)
 18. 让接口容易被正确使用，不易被误用(Make interface easy to use correctly and hard to use incorrectly)
     > 好的接口很容易被正确使用，不容易被误用。你应该在你的所有借口中努力达成这些性质。
@@ -142,22 +145,22 @@
 24. 若所有参数皆需类型，请为此采用 non-member 函数(Declare non-member functions when type conversion should apply to all parameters)
     > 如果你需要为某个函数的所有参数（包括被 this 指针所指的那个隐喻参数）进行类型转换，那么这个函数必须是个 non-member。
     - 对于 binary operator，如果 lhs 和 rhs 都需要隐式转换，那么可以将 operator 声明为 non-member 函数
-    ```cpp
-    class Rational { public: Rational(int n, int d); };
-    Rational a(1, 2);
-    {
-        // class member function
-        const Rational Rational::Rational(const Rational& rhs) const;
-        // no
-        Result res = 2 * a;
-    }
-    {
-        // non-member function
-        const Rational operator*(const Rational& lhs, const Rational& rhs);
-        // yes
-        Result res = 2 * a;
-    }
-    ```
+        ```cpp
+        class Rational { public: Rational(int n, int d); };
+        Rational a(1, 2);
+        {
+            // class member function
+            const Rational Rational::Rational(const Rational& rhs) const;
+            // no
+            Result res = 2 * a;
+        }
+        {
+            // non-member function
+            const Rational operator*(const Rational& lhs, const Rational& rhs);
+            // yes
+            Result res = 2 * a;
+        }
+        ```
 25. 考虑写一个不抛异常的 swap 函数(Consider support for a non-throwing swap)
     > 当 std::swap 对你的类型效率不高时，提供一个 swap 成员函数，并确定这个函数不抛异常。
     > 如果你提供一个 member swap, 也该提供一个 non-member swap 用来调用前者，对于 classes (而非 templates)，也请特化 std::swap。
@@ -170,3 +173,20 @@
 26. 尽可能延后变量定义式的出现时间(Postpone variable definitions as long as possible)
     > 尽可能延后变量定义式的出现。这样做可增加程序的清晰度并改善程序效率
     - 提前定义的变量如果没有使用，会造成多余的构造与析构
+27. 尽量少做转型动作(Minimize casting)
+    > 如果可以，尽量便面转型，特别是在注重效率的代码中避免 dynamic_casts。如果有个设计需要转型 动作，试着发展无需转型的替代设计
+    > 如果转型是必要的，试着将它隐藏于某个函数背后。客户随后可以调用该函数，而不需将转型放进他们自己的代码内。
+    > 宁可使用 C++-style(新式)转型，不要使用旧式转型。前者很容易识别出来，而且也比较有着分门别类的职掌。
+    - 通过 cast 得到的 base 和 derived 指针的地址可能不同
+    - 在需要调用基类的函数时，不要使用 cast，那样会新建一个临时变量，函数调用是不符合预期的，可以直接使用 `base::function()` 来调用基类函数
+        ```cpp
+        // no
+        virtual void Derived::function() override {
+            static_cast<Base>(*this).function();
+        }
+        // yes
+        virtual void Derived::function() override {
+            Base::function();
+        }
+        ```
+    - dynamic_cast 有性能问题，在明确知道可以向下 dynamic_cast 的类型时，可以使用 static_cast，因为 static_cast 会更快（但是不安全，所以需要用户明确知道可以 cast）
